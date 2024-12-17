@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymelaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatemas Dagbok</title>
 </head>
 <body>
-    <h1>Skriva dagbok</h1>
+    <h1>Fatemas dagbok</h1>
+    <ul>
+        <li th:each=" dairy: ${dairies}">
+            <p><strong>Title:</strong> <span th:text="${dairy.title}"></span></p>
+            <!--#dates.format(), thymelaf function that converts date to a readable format-->
+            <p><strong>Date:</strong> <span th:text="${#dates.format(dairy.date, 'yyy-MM-dd')}"></span></p>
+            <p><strong>Text:</strong> <span th:text="${dairy.text}"></span></p>
+            
+        </li>
+    </ul>
 </body>
 </html>
