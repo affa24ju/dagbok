@@ -21,7 +21,7 @@
             <label for="text">Ange text:</label>
             <input type="text" id="text" th:field="*{text}"required> <br><br>
             
-            <button type="submit">Lägg till</button>
+            <button type="submit">Lägg till</button> <br><br>
 
         </form>
     </div>
@@ -33,6 +33,12 @@
             <!--#dates.format(), thymelaf function that converts date to a readable format-->
             <p><strong>Date:</strong> <span th:text="${#dates.format(dairy.date, 'yyy-MM-dd')}"></span></p>
             <p><strong>Text:</strong> <span th:text="${dairy.text}"></span></p>
+
+            <!--Adding delete button -->
+            <form method="post" th:action= "@{/delete-post/{id}(id=${dairy.id})}" style="display: inline;">
+                <button type="submit" onclick="return confirm('Är du säker att du vill ta bort inlägg?')">Ta bort</button>
+
+            </form>
             
         </li>
     </ul>
