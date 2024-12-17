@@ -46,6 +46,7 @@ public class DairyController {
         return "redirect:/";
     }  
 
+    //Handles deleting a post from webpage
     @PostMapping("/delete-post/{id}")
     public String deletePost(@PathVariable("id")int id) {
 
@@ -55,6 +56,20 @@ public class DairyController {
         dairyRepository.save(dairy);
 
         System.out.println("Deleted from website");
+        return "redirect:/";
+    }
+
+    //Show edit form with the existing dairy data
+    @GetMapping("/edit-post/{id}")
+    public String editPost(@PathVariable("id")int id, Model model){
+
+        return "edit-post";
+    }
+
+    //Save the updated dairy
+    @PostMapping("/edit-post/{id}")
+    public String saveEdit(@PathVariable("id")int id, @ModelAttribute Dairy dairy){
+
         return "redirect:/";
     }
     
