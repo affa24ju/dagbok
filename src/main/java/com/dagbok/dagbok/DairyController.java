@@ -1,5 +1,6 @@
 package com.dagbok.dagbok;
-
+import java.sql.Date;
+import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,10 @@ public class DairyController {
     @GetMapping
     public String getIndex(Model model){
 
-        //Visar bara de som inte är deletad
-        model.addAttribute("dairies", dairyRepository.findAllByIsDeletedFalse());
+        Date today = new Date(Calendar.getInstance().getTimeInMillis());
+        //Visar bara de som inte är deletad och inte har framtida datum
+        model.addAttribute("dairies", dairyRepository.findAllByIsDeletedFalseAndDateLessThanEqual(today));
+        
         //Adding an empty Dairy object for the form
         model.addAttribute("dairy", new Dairy());
         return "index";
