@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Dairy{
@@ -14,8 +16,15 @@ public class Dairy{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String title;
+
+    //to specify that it's date type without time
+    @Temporal(TemporalType.DATE)
     private Date date;
+
     private String text;
+
+    
+    //Getters & setters
     public int getId() {
         return id;
     }
@@ -40,9 +49,5 @@ public class Dairy{
     public void setText(String text) {
         this.text = text;
     }
-
-    //Getters & setters
-    
-
     
 }
