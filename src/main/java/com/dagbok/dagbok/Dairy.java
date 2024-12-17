@@ -13,8 +13,9 @@ import jakarta.persistence.TemporalType;
 public class Dairy{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String title;
 
     //to specify that it's date type without time

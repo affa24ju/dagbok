@@ -7,16 +7,26 @@
 </head>
 <body>
     <h1>Fatemas dagbok</h1>
+
+    <!--Form för att skapa nytt inlägg-->
     <div>
         <h3>Skapa ett nytt inlägg</h3>
-        <form method="post" th:action= "@{/new-post}">
-            <input type="text">
-            <input type="date">
-            <input type="text">
-            <button>Lägg till</button>
+        <form method="post" th:action= "@{/new-post}" th:object="${dairy}">
+            <label for="title">Ange rubrik:</label>
+            <input type="text" id="title" th:field="*{title}" required><br><br>
+
+            <label for="date">Datum:</label>
+            <input type="date" id="date" th:field="*{date}" required><br><br>
+
+            <label for="text">Ange text:</label>
+            <input type="text" id="text" th:field="*{text}"required> <br><br>
+            
+            <button type="submit">Lägg till</button>
 
         </form>
     </div>
+    
+    <!--Displaying data from database-->
     <ul>
         <li th:each=" dairy: ${dairies}">
             <p><strong>Title:</strong> <span th:text="${dairy.title}"></span></p>
