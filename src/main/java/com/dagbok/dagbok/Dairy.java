@@ -24,6 +24,9 @@ public class Dairy{
 
     private String text;
 
+    //För att ha koll på att ta bort från websidan men inte från databasen 
+    private boolean isDeleted = false;
+
     
     //Getters & setters
     public int getId() {
@@ -49,6 +52,12 @@ public class Dairy{
     }
     public void setText(String text) {
         this.text = text;
+    }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
     
 }
