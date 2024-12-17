@@ -62,13 +62,25 @@ public class DairyController {
     //Show edit form with the existing dairy data
     @GetMapping("/edit-post/{id}")
     public String editPost(@PathVariable("id")int id, Model model){
-
+        Dairy dairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid dairy id: " + id));
+        //Adding dairy to the model for editing
+        model.addAttribute("dairy", dairy);
+        //Tillbaka till edit-post
         return "edit-post";
     }
 
     //Save the updated dairy
     @PostMapping("/edit-post/{id}")
     public String saveEdit(@PathVariable("id")int id, @ModelAttribute Dairy dairy){
+        Dairy existingDairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid id: " + id));
+
+        //updatera existing dairy detalj
+        existingDairy.setTitle(dairy.getTitle());
+        existingDairy.setDate(dairy.getDate());
+        existingDairy.setText(dairy.getText());
+
+        //Sparar uppdaterad data
+        dairyRepository.save(existingDairy);
 
         return "redirect:/";
     }
