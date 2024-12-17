@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -17,7 +18,9 @@ public class DairyController {
     //Handles Get request & adds data to the model
     @GetMapping
     public String getIndex(Model model){
-        model.addAttribute("dairies", dairyRepository.findAll());
+
+        //Visar bara de som inte är deletad
+        model.addAttribute("dairies", dairyRepository.findAllByIsDeletedFalse());
         //Adding an empty Dairy object for the form
         model.addAttribute("dairy", new Dairy());
         return "index";
@@ -42,5 +45,17 @@ public class DairyController {
 
         return "redirect:/";
     }  
+
+    @PostMapping("/delete-post/{id}")
+    public String deletePost(@PathVariable("id")int id) {
+
+        Dairy dairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid dairy id: " + id));
+        //Mark as deleted from website
+        dairy.setDeleted(true);
+        dairyRepository.save(dairy);
+
+        System.out.println("Deleted from website");
+        return "redirect:/";
+    }
     
 }
