@@ -7,6 +7,16 @@
 </head>
 <body>
     <h1>Fatemas dagbok</h1>
+    <div>
+        <h3>Skapa ett nytt inlägg</h3>
+        <form method="post" th:action= "@{/new-post}">
+            <input type="text">
+            <input type="date">
+            <input type="text">
+            <button>Lägg till</button>
+
+        </form>
+    </div>
     <ul>
         <li th:each=" dairy: ${dairies}">
             <p><strong>Title:</strong> <span th:text="${dairy.title}"></span></p>
