@@ -29,14 +29,14 @@
             <textarea id="text" th:field="*{text}" required rows="4" cols="50"></textarea>
             <br>
             
-            <button type="submit" class="btn btn-success">Lägg till</button> <br><br>
+            <button type="submit" class="btn btn-success">Lägg till nytt inlägg</button> <br><br>
 
         </form>
     </div>
     <hr />
     <!--Displaying data from database-->
     <ul class="list-group">
-        <li class="list-group-item list-group-item-primary" th:each=" dairy: ${dairies}">
+        <li class="list-group-item list-group-item-secondary" th:each=" dairy: ${dairies}">
             <p><strong>Title:</strong> <span th:text="${dairy.title}"></span></p>
             <!--#dates.format(), thymelaf function that converts date to a readable format-->
             <p><strong>Date:</strong> <span th:text="${#dates.format(dairy.date, 'yyy-MM-dd')}"></span></p>
