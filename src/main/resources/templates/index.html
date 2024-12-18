@@ -55,7 +55,7 @@
 
             <!--Adding a delete button to delete from database-->
             <form method="post" th:action= "@{/permanent-delete-post/{id}(id=${dairy.id})}" style="display: inline;">
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Är du säker att du vill ta bort inlägget från databas?')">Delete</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('OBS! Du får aldrig tillbaka!! Är du säker att du vill ta bort inlägget från databas?')">Delete</button>
 
             </form>
             
