@@ -47,9 +47,15 @@
                 <button type="button" class="btn btn-secondary">Redigera</button>
             </a>
 
-            <!--Adding delete button -->
+            <!--Adding delete button to soft delete, not removing from database-->
             <form method="post" th:action= "@{/delete-post/{id}(id=${dairy.id})}" style="display:inline;">
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Är du säker att du vill ta bort inlägg?')">Ta bort</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Är du säker att du vill ta bort inlägget från flöde?')">Dölj</button>
+
+            </form>
+
+            <!--Adding a delete button to delete from database-->
+            <form method="post" th:action= "@{/permanent-delete-post/{id}(id=${dairy.id})}" style="display: inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Är du säker att du vill ta bort inlägget från databas?')">Delete</button>
 
             </form>
             
