@@ -53,8 +53,10 @@ public class DairyController {
     @PostMapping("/delete-post/{id}")
     public String deletePost(@PathVariable("id")int id) {
 
+        //Om id inte stämmer med databas, visar felmeddelande
         Dairy dairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid dairy id: " + id));
-        //Mark as deleted from website, soft delete
+        
+        //Markerar som deletad & döljar från sidan men finns kvar i databas, soft delete
         dairy.setDeleted(true);
         dairyRepository.save(dairy);
 
@@ -66,7 +68,8 @@ public class DairyController {
     @PostMapping("/permanent-delete-post/{id}")
     public String permanentDeletePost(@PathVariable("id")int id){
         Dairy dairy = dairyRepository.findById(id).orElseThrow( ()-> new IllegalArgumentException("Invalid dairy id: " + id));
-        //delete from database
+        
+        //deletar från databas, hard delete
         dairyRepository.delete(dairy);
         return "redirect:/";
     }
@@ -85,6 +88,7 @@ public class DairyController {
     //Save the updated dairy
     @PostMapping("/edit-post/{id}")
     public String saveEdit(@PathVariable("id")int id, @ModelAttribute Dairy dairy){
+        
         Dairy existingDairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid id: " + id));
 
         //updatera existing dairy detalj
