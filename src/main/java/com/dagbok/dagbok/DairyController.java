@@ -37,7 +37,7 @@ public class DairyController {
         //it shows error "duplicate primary id", så sätter 0 för säkerhetsskull & det funkar
         dairy.setId(0);
 
-        //to save in database
+        //För att spara i databas
         dairyRepository.save(dairy);
 
         //Dairy dairy = new Dairy();
@@ -54,13 +54,23 @@ public class DairyController {
     public String deletePost(@PathVariable("id")int id) {
 
         Dairy dairy = dairyRepository.findById(id).orElseThrow( () -> new IllegalArgumentException("Invalid dairy id: " + id));
-        //Mark as deleted from website
+        //Mark as deleted from website, soft delete
         dairy.setDeleted(true);
         dairyRepository.save(dairy);
 
         System.out.println("Deleted from website");
         return "redirect:/";
     }
+
+    //Handles permanent delete from database
+    @PostMapping("/permanent-delete-post/{id}")
+    public String permanentDeletePost(@PathVariable("id")int id){
+        Dairy dairy = dairyRepository.findById(id).orElseThrow( ()-> new IllegalArgumentException("Invalid dairy id: " + id));
+        //delete from database
+        dairyRepository.delete(dairy);
+        return "redirect:/";
+    }
+
 
     //Show edit form with the existing dairy data
     @GetMapping("/edit-post/{id}")
