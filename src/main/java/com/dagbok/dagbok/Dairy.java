@@ -12,13 +12,14 @@ import jakarta.persistence.TemporalType;
 @Entity
 public class Dairy{
 
+    //GenerationType.AUTO ger fel meddelande att det blir duplicate ID, därför använder IDENTITY
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private int id;
 
     private String title;
 
-    //to specify that it's date type without time
+    //För att specifera att date är bara Date type utan tid
     @Temporal(TemporalType.DATE)
     private Date date;
 
